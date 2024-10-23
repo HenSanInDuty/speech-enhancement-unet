@@ -42,9 +42,5 @@ def prediction(weights_path, name_model, file, sample_rate, min_duration, frame_
     X_denoise = m_amp_db_audio - inv_sca_X_pred[:,:,:,0]
     #Reconstruct audio from denoised spectrogram and phase
     audio_denoise_recons = matrix_spectrogram_to_numpy_audio(X_denoise, m_pha_audio, frame_length, hop_length_fft)
-    #Number of frames
-    nb_samples = audio_denoise_recons.shape[0]
-    #Save all frames in one file
-    denoise_long = audio_denoise_recons.reshape(1, nb_samples * frame_length)*10
     
-    return denoise_long, sample_rate
+    return audio_denoise_recons, sample_rate
